@@ -389,12 +389,26 @@ void linear_mtxf_transpose_mul_vec3f(Mat4 m, Vec3f dst, Vec3f v) {
 
 /// Build a matrix that rotates around the z axis, then the x axis, then the y axis, and then translates.
 void mtxf_rotate_zxy_and_translate(Mat4 dest, Vec3f trans, Vec3s rot) {
-    register f32 sx   = sins(rot[0]);
-    register f32 cx   = coss(rot[0]);
-    register f32 sy   = sins(rot[1]);
-    register f32 cy   = coss(rot[1]);
-    register f32 sz   = sins(rot[2]);
-    register f32 cz   = coss(rot[2]);
+    f32 sx, sy, sz;
+    f32 cx = coss(rot[0]);
+    f32 cy = coss(rot[1]);
+    f32 cz = coss(rot[2]);
+    f32 entry[3];
+    if (rot[0]&0x8000){
+        sx =-sqrtf(1.f - cx * cx);
+    } else {
+        sx = sqrtf(1.f - cx * cx);
+    }
+    if (rot[1]&0x8000){
+        sy = -sqrtf(1.f - cy * cy);
+    } else {
+        sy = sqrtf(1.f - cy * cy);
+    }
+    if (rot[2]&0x8000){
+        sz = -sqrtf(1.f - cz * cz);
+    } else {
+        sz = sqrtf(1.f - cz * cz);
+    }
     register f32 sysz = (sy * sz);
     register f32 cycz = (cy * cz);
     dest[0][0] = ((sysz * sx) + cycz);
@@ -414,12 +428,26 @@ void mtxf_rotate_zxy_and_translate(Mat4 dest, Vec3f trans, Vec3s rot) {
 
 /// Build a matrix that rotates around the x axis, then the y axis, then the z axis, and then translates.
 UNUSED void mtxf_rotate_xyz_and_translate(Mat4 dest, Vec3f trans, Vec3s rot) {
-    register f32 sx   = sins(rot[0]);
-    register f32 cx   = coss(rot[0]);
-    register f32 sy   = sins(rot[1]);
-    register f32 cy   = coss(rot[1]);
-    register f32 sz   = sins(rot[2]);
-    register f32 cz   = coss(rot[2]);
+    f32 sx, sy, sz;
+    f32 cx = coss(rot[0]);
+    f32 cy = coss(rot[1]);
+    f32 cz = coss(rot[2]);
+    f32 entry[3];
+    if (rot[0]&0x8000){
+        sx =-sqrtf(1.f - cx * cx);
+    } else {
+        sx = sqrtf(1.f - cx * cx);
+    }
+    if (rot[1]&0x8000){
+        sy = -sqrtf(1.f - cy * cy);
+    } else {
+        sy = sqrtf(1.f - cy * cy);
+    }
+    if (rot[2]&0x8000){
+        sz = -sqrtf(1.f - cz * cz);
+    } else {
+        sz = sqrtf(1.f - cz * cz);
+    }
     dest[0][0] = (cy * cz);
     dest[0][1] = (cy * sz);
     dest[0][2] = -sy;
@@ -439,13 +467,26 @@ UNUSED void mtxf_rotate_xyz_and_translate(Mat4 dest, Vec3f trans, Vec3s rot) {
 
 /// Build a matrix that rotates around the z axis, then the x axis, then the y axis, and then translates and multiplies.
 void mtxf_rotate_zxy_and_translate_and_mul(Vec3s rot, Vec3f trans, Mat4 dest, Mat4 src) {
-    register f32 sx = sins(rot[0]);
-    register f32 cx = coss(rot[0]);
-    register f32 sy = sins(rot[1]);
-    register f32 cy = coss(rot[1]);
-    register f32 sz = sins(rot[2]);
-    register f32 cz = coss(rot[2]);
-    Vec3f entry;
+    f32 sx, sy, sz;
+    f32 cx = coss(rot[0]);
+    f32 cy = coss(rot[1]);
+    f32 cz = coss(rot[2]);
+    f32 entry[3];
+    if (rot[0]&0x8000){
+        sx =-sqrtf(1.f - cx * cx);
+    } else {
+        sx = sqrtf(1.f - cx * cx);
+    }
+    if (rot[1]&0x8000){
+        sy = -sqrtf(1.f - cy * cy);
+    } else {
+        sy = sqrtf(1.f - cy * cy);
+    }
+    if (rot[2]&0x8000){
+        sz = -sqrtf(1.f - cz * cz);
+    } else {
+        sz = sqrtf(1.f - cz * cz);
+    }
     register f32 sysz = (sy * sz);
     register f32 cycz = (cy * cz);
     entry[0] = ((sysz * sx) + cycz);
@@ -469,13 +510,26 @@ void mtxf_rotate_zxy_and_translate_and_mul(Vec3s rot, Vec3f trans, Mat4 dest, Ma
 
 /// Build a matrix that rotates around the x axis, then the y axis, then the z axis, and then translates and multiplies.
 void mtxf_rotate_xyz_and_translate_and_mul(Vec3s rot, Vec3f trans, Mat4 dest, Mat4 src) {
-    register f32 sx = sins(rot[0]);
-    register f32 cx = coss(rot[0]);
-    register f32 sy = sins(rot[1]);
-    register f32 cy = coss(rot[1]);
-    register f32 sz = sins(rot[2]);
-    register f32 cz = coss(rot[2]);
-    Vec3f entry;
+    f32 sx, sy, sz;
+    f32 cx = coss(rot[0]);
+    f32 cy = coss(rot[1]);
+    f32 cz = coss(rot[2]);
+    f32 entry[3];
+    if (rot[0]&0x8000){
+        sx =-sqrtf(1.f - cx * cx);
+    } else {
+        sx = sqrtf(1.f - cx * cx);
+    }
+    if (rot[1]&0x8000){
+        sy = -sqrtf(1.f - cy * cy);
+    } else {
+        sy = sqrtf(1.f - cy * cy);
+    }
+    if (rot[2]&0x8000){
+        sz = -sqrtf(1.f - cz * cz);
+    } else {
+        sz = sqrtf(1.f - cz * cz);
+    }
     entry[0] = (cy * cz);
     entry[1] = (cy * sz);
     entry[2] = -sy;
